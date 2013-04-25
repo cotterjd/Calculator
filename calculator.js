@@ -48,7 +48,7 @@ function clicknumbers() {
                 lastInput = "number";
             }
         }
-        test();
+        debugInfo();
     });
 }//end clicknumbers
 function clickOperation() {
@@ -88,7 +88,7 @@ function clickOperation() {
                 $('#calculations').append(" " + $(this).val());
             }
         }
-        test();
+        debugInfo();
     });
 }
 
@@ -128,7 +128,7 @@ function enter() {
             }
             lastInput = "=";
         }
-        test();
+        debugInfo();
     });
 }
 
@@ -136,7 +136,7 @@ function clear() {
     $('#clear').click(function () {
         $('#calculations').empty();
         resetValues();
-        test();
+        debugInfo();
     });
 }
 
@@ -149,7 +149,7 @@ function resetValues() {
     beforeLastInput = "";
 }
 
-function test() {
+function debugInfo() {
     console.log("operation: " + operation + "\n" +
             "lastInput: " + lastInput + "\n" +
             "beforeLastInput: " + beforeLastInput + "\n" +
