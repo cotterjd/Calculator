@@ -23,8 +23,7 @@ function clicknumbers() {
             numberOne += $(this).val();
             $('#calculations').append($(this).val());
             if (lastInput == "-") {
-                numberOne = parseFloat(numberOne);
-                numberOne = numberOne * -1;
+                numberOne = changeSign(numberOne);
             }
             beforeLastInput = lastInput;
             lastInput = "number";
@@ -40,15 +39,15 @@ function clicknumbers() {
             }
             else {
                 $('#calculations').append($(this).val());
-                if (lastInput == "-" && beforeLastInput != "number") {
-                    numberTwo = parseFloat(numberTwo);
-                    numberTwo = numberTwo * -1;
+                if (lastInput == "-" && (beforeLastInput != "number" && beforeLastInput != "=")) {
+                    numberTwo = changeSign(numberTwo);
+                    debugInfo();
                 }
                 beforeLastInput = lastInput;
                 lastInput = "number";
             }
         }
-        debugInfo();
+        //debugInfo();
     });
 }//end clicknumbers
 function clickOperation() {
@@ -76,7 +75,7 @@ function clickOperation() {
                     numberTwo = "";
                 }
             } // end if
-            if (!($(this).val() == "-" && lastInput != "number")) {//if this input is not a minus sign
+            if (!($(this).val() == "-" && (lastInput != "number" && lastInput != "="))) {//if this input is not a minus sign
                 operation = $(this).val();
                 beforeLastInput = lastInput;
                 lastInput = $(this).val();
@@ -103,28 +102,28 @@ function enter() {
                 numberTwo = parseFloat(numberTwo);
             }
             if (operation == "x") {
-                $('#calculations').append(equalsString + numberOne * numberTwo);
+                $('#calculations').append(equalsString + multiply(numberOne, numberTwo));
                 numberOne = numberOne * numberTwo;
             }
             else if (operation == "+") {
-                $('#calculations').append(equalsString + (numberOne + numberTwo));
+                $('#calculations').append(equalsString + add(numberOne, numberTwo));
                 numberOne = numberOne + numberTwo;
             }
             else if (operation == "-") {
                 if (numberTwo == "") {
-                    $('#calculations').append(equalsString + numberOne);
+                    printNumber(numberOne);
                 }
                 else {
-                    $('#calculations').append(equalsString + (numberOne - numberTwo));
+                    $('#calculations').append(equalsString + subtract(numberOne, numberTwo));
                     numberOne = numberOne - numberTwo;
                 }
             }
             else if (operation == "/") {
-                $('#calculations').append(equalsString + numberOne / numberTwo);
+                $('#calculations').append(equalsString + divide(numberOne, numberTwo));
                 numberOne = numberOne / numberTwo;
             }
             else {
-                $('#calculations').append(equalsString + numberOne);
+                printNumber(numberOne);
             }
             lastInput = "=";
         }
@@ -138,6 +137,31 @@ function clear() {
         resetValues();
         debugInfo();
     });
+}
+
+function add(num1, num2) {
+    return num1 + num2;
+}
+
+function subtract(num1, num2) {
+    return num1 - num2;
+}
+
+function multiply(num1, num2) {
+    return num1 * num2;
+}
+
+function divide(num1, num2) {
+    return num1 / num2;
+}
+
+function changeSign(num) {
+    num = parseFloat(num);
+    return num * -1;
+}
+
+function printNumber(num) {
+    $('#calculations').append(equalsString + numberOne);
 }
 
 function resetValues() {
@@ -157,4 +181,3 @@ function debugInfo() {
             "numberTwo: " + numberTwo + "\n" +
             "numberTracker: " + numberTracker + "\n");
 }
-
