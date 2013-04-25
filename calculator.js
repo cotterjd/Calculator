@@ -125,5 +125,12 @@ function enter() {
 function clear() {
     $('#clear').click(function () {
         $('#calculations').empty();
+        //reset all values
+        numberOne = "";
+        numberTwo = "";
+        numberTracker = 0;
+        operation = "";
+        lastInput = "";
+        beforeLastInput = "";
     });
 }
