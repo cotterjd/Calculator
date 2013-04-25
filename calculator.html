@@ -1,128 +1,7 @@
 <head>
 	<title>Simple Calculator</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-	<script>
-	    $(document).ready(function () {
-	        clicknumbers();
-	        clickOperation();
-	        Enter();
-	    });
-
-	    var lastInput = "";
-	    var beforeLastInput = "";
-	    var numberOne = "";
-	    var numberTwo = "";
-	    var numberTracker = 0;
-	    var operation = "";
-	    var equalsString = " = <br />-----------------<br />";
-	    function clicknumbers() {
-	        $('.number').click(function () {
-	            if (numberTracker == 0) {
-	                numberOne += $(this).val();
-	                $('body').append($(this).val());
-	                if (lastInput == "-") {
-	                    numberOne = parseFloat(numberOne);
-	                    numberOne = numberOne * -1;
-	                }
-					beforeLastInput = lastInput;
-	            	lastInput = "number";
-	            }
-	            else {//after numbtracker=1, numberOne is no longer defined in this function
-	                numberTwo += $(this).val();
-	                if (operation == "/" && numberTwo == 0) {
-	                    alert("Division by 0 is not defined in mathematics");
-						numberTwo = "";
-	                }
-	                else {
-	                    $('body').append($(this).val());
-						if (lastInput == "-" && beforeLastInput != "number") {
-	                    	numberTwo = parseFloat(numberTwo);
-	                    	numberTwo = numberTwo * -1;
-	                	}
-						beforeLastInput = lastInput;
-	            		lastInput = "number";
-	                }  
-	            }
-	        });
-	    }//end clicknumbers
-	    function clickOperation() {
-	        $('.operation').click(function () {
-	            if (lastInput == "number") {
-	                numberTracker++;
-	            }   //prevent duplicat operations//allows negative numbers, but not duplicat negatives//allows subtraction of negative numbers
-	            if (lastInput == "number" || ($(this).val()=="-" && lastInput != "-") || ($(this).val()=="-" && beforeLastInput=="number")) {
-	                if (numberTracker != 0 && numberTracker != 1) {
-	                    numberOne = parseFloat(numberOne);
-	                    if (numberTwo != "") {
-	                        numberTwo = parseFloat(numberTwo);
-	                        if (operation == "*") {
-	                            numberOne = numberOne * numberTwo;
-	                        }
-	                        else if (operation == "+") {
-	                            numberOne = numberOne + numberTwo;
-	                        }
-	                        else if (operation == "-") {
-	                            numberOne = numberOne - numberTwo;
-	                        }
-	                        else {
-	                            numberOne = numberOne / numberTwo;
-	                        }
-	                        numberTwo = "";
-	                    }
-	                }// end if
-	                if (!($(this).val() == "-" && lastInput != "number")) {//if this input is not a minus sign
-                        operation = $(this).val();
-	                }
-	                beforeLastInput = lastInput;
-	                lastInput = $(this).val();
-	                $('body').append(" " + $(this).val() + "<br />");
-	            }
-	        });
-	    }
-
-	    function Enter() {
-	        $('#enter').click(function () {
-	            if((numberOne != "" && numberTwo != "" && operation != "") || (numberOne != "" && numberTwo == "" && (operation == "" || operation == "-"))) {
-	                numberOne = parseFloat(numberOne);
-	                if (numberTwo != "") {
-	                    numberTwo = parseFloat(numberTwo);
-	                }
-	                if (operation == "*") {
-	                    $('body').append(equalsString + numberOne * numberTwo);
-	                }
-	                else if (operation == "+") {
-	                    $('body').append(equalsString + (numberOne + numberTwo));
-	                }
-	                else if (operation == "-") {
-	                    if (numberTwo == "") {
-	                        $('body').append(equalsString + numberOne);
-	                    }
-	                    else {
-	                        $('body').append(equalsString + (numberOne - numberTwo));
-	                    }
-	                }
-	                else if (operation == "/") {
-	                    $('body').append(equalsString + numberOne / numberTwo);
-	                }
-	                else {
-	                    $('body').append(equalsString + numberOne);
-	                }
-	            }
-	            else{
-	                alert("invalid input");
-	            }
-                //reset all values
-	            numberOne = "";
-	            numberTwo = "";
-	            numberTracker = 0;
-	            operation = "";
-	            lastInput = "";
-	            beforeLastInput = "";
-	            $('body').append("<br /></br />");
-	        });
-	    }
-		
-	</script>
+	<script src="calculator.js"></script>
 </head>
 <body>
 <table>
@@ -142,15 +21,15 @@
 		<td><button id="seven" value="7" class="number">7</button></td>
 		<td><button id="eight" value="8" class="number">8</button></td>
 		<td><button id="nine" value="9" class="number">9</button></td>
-		<td><button id="times" value="*" class="operation">x</button></td>
+		<td><button id="times" value="x" class="operation">x</button></td>
 	</tr>
-</table>
-<table>
-	<tr>
+    <tr>
         <td><button id="zero" value="0" class="number">0</button></td>
-		<td><button id="enter">enter</button></td>
+		<td><button id="enter">=</button></td>
+        <td><button id="clear">C</button></td>
 		<td><button id="divide" value="/" class="operation">/</button></td>
 	</tr>
 </table>
+<div id="calculations"></div>
 </body>
  
