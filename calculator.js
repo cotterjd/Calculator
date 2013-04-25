@@ -110,14 +110,8 @@ function enter() {
             else {
                 $('#calculations').append(equalsString + numberOne);
             }
-            //reset all values
-            numberOne = "";
-            numberTwo = "";
-            numberTracker = 0;
-            operation = "";
-            lastInput = "";
-            beforeLastInput = "";
             $('#calculations').append("<br /></br />");
+            resetValues();
         }
     });
 }
@@ -125,12 +119,16 @@ function enter() {
 function clear() {
     $('#clear').click(function () {
         $('#calculations').empty();
-        //reset all values
-        numberOne = "";
-        numberTwo = "";
-        numberTracker = 0;
-        operation = "";
-        lastInput = "";
-        beforeLastInput = "";
+        resetValues();
     });
+    resetValue();
+}
+
+function resetValues() {
+    numberOne = "";
+    numberTwo = "";
+    numberTracker = 0;
+    operation = "";
+    lastInput = "";
+    beforeLastInput = "";
 }
