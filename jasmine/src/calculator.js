@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    clicknumbers();
+    clickNumber();
     clickOperation();
     enter();
     clear();
@@ -13,7 +13,7 @@ var numberTracker = 0;
 var operation = "";
 var equalsString = " = <br />--------------------------<br />";
 
-function clicknumbers() {
+function clickNumber() {
     $('.number').click(function () {
         if (lastInput == "=") {
             resetValues();
@@ -47,7 +47,7 @@ function clicknumbers() {
                 lastInput = "number";
             }
         }
-        //debugInfo();
+        debugInfo();
     });
 }//end clicknumbers
 function clickOperation() {
