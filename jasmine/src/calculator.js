@@ -11,7 +11,7 @@ var numberOne = "";
 var numberTwo = "";
 var numberTracker = 0;
 var operation = "";
-var equalsString = " = <br />--------------------------<br />";
+var equalsString = " = <br />----------------------------<br />";
 
 function clickNumber() {
     $('.number').click(function () {
