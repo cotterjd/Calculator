@@ -29,8 +29,4 @@ describe("Calculator", function () {
     it("should change sign when changeSign function is called", function () {
         expect(changeSign(1)).toBe(-1);
     });
-
-    it("should reset the value for numberTwo if the user tries to divide by 0", function () {
-        
-    });
 });
